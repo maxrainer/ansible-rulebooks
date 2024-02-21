@@ -8,7 +8,7 @@
   rules:
 
     - name: Capture all events from this source
-      condition: event.alert is defined
+      condition: true
       action:
         debug:
 
