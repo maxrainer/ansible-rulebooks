@@ -1,4 +1,5 @@
 ---
+# {"payload":{"msg":"Configured from console by cisco on vty0 (172.16.1.1)","host":"ios-rt1"}}
 - name: Listen to Syslog requests
   hosts: all
   sources:
@@ -7,17 +8,17 @@
         port: 5001
   rules:
 
-    - name: Capture all events from this source
-      condition: true
-      action:
-        debug:
+    # - name: Capture all events from this source
+    #   condition: true
+    #   action:
+    #     debug:
 
     - name: Parse Interfaces for a single host
-      condition: true
-      # condition: event.payload.message == "Ansible is super cool"
+      condition: event.payload.msg is search("cisco")
       action:
         run_job_template:
-          name: MERAKI 00 - get org ID
+          name: "NETBOX 02 - parse intfs"
           organization: Default
           job_args:
-            limit: "{{ event.meta.hosts }}"
+            limit: "{{ event.payload.host }}"
+            extra_vars: "{{ event.payload }}"
