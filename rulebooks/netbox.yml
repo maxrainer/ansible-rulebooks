@@ -15,6 +15,7 @@
           organization: Default
           job_args:
             extra_vars: "{{ event.payload }}"
+            limit: "{{ event.payload.device }}"
 
     - name: Did not match any model
       condition: event.payload is defined
