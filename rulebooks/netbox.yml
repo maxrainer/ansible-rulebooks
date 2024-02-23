@@ -8,6 +8,6 @@
 
   rules:
     - name: Capture all events from this source
-      condition: true
+      condition: event.payload is defined
       action:
         debug:
