@@ -11,12 +11,14 @@
       condition: true
       action:
         debug:
+          var: event.payload.message
 
     - name: Parse Interfaces for a single host
-      condition: event.payload.message == "Ansible is super cool"
+      condition: true
+      # condition: event.payload.message == "Ansible is super cool"
       action:
         run_job_template:
-          name: "NETBOX 02 - parse intfs"
+          name: MERAKI 00 - get org ID
           organization: Default
           job_args:
             limit: "{{ event.meta.hosts }}"
