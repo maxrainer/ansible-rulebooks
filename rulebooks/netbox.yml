@@ -7,6 +7,16 @@
         port: 5002
 
   rules:
+    - name: IP address changed
+      condition: event.payload.data.url is search("/api/ipam/ip-addresses/")
+      action:
+        run_job_template:
+          name: "NETBOX 04 - push L3 intf"
+          organization: Default
+          job_args:
+            limit: "{{ event.payload.data.device.name }}"
+            extra_vars: "{{ event.payload.data }}"
+
     - name: Capture all events from this source
       condition: event.payload is defined
       action:
