@@ -14,7 +14,7 @@
           name: "NETBOX 04 - push L3 intf"
           organization: Default
           job_args:
-            limit: "{{ event.payload.device }}"
+            extra_vars: "{{ event.payload }}"
 
     - name: Did not match any model
       condition: event.payload is defined
