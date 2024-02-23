@@ -16,7 +16,7 @@
           job_args:
             limit: "{{ event.payload.device }}"
 
-    - name: Capture all events from this source
+    - name: Did not match any model
       condition: event.payload is defined
       action:
         debug:
