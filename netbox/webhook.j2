@@ -1,0 +1,14 @@
+{ 
+  "event": "{{ event }}",
+  "model": "{{ model }}",
+  "timestamp": "{{ timestamp }}",
+  "id": "{{ data['id'] }}",
+  "source":  "{{ data['url'] }}"
+{% if data['device'] is defined %}
+"device": "{{ data['device']['name'] }}",
+"device_id": "{{ data['device']['id'] }}"
+{% else %}
+"device": "{{ data['assigned_object']['device']['name'] }}",
+"device_id": "{{ data['assigned_object']['device']['id'] }}"
+{% endif %}
+}

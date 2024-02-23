@@ -1,0 +1,1 @@
+ansible-rulebook --rulebook ./rulebooks/netbox.yml --controller-url https://172.16.1.32 --controller-ssl-verify no --controller-token bwgDWcaDjqAsiHy3siS5iYxXSkxMZ2
