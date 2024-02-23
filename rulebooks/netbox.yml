@@ -1,12 +1,13 @@
 ---
-- name: Listen to Netbox webhooks  
+- name: Listen to Netbox webhooks
+  hosts: all
   sources:
     - ansible.eda.webhook:
         host: 0.0.0.0
         port: 5002
+
   rules:
     - name: Capture all events from this source
       condition: true
       action:
         debug:
-
