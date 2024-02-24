@@ -17,6 +17,16 @@
             extra_vars: "{{ event.payload }}"
             limit: "{{ event.payload.host }}"
 
+    - name: Interface configuration and Layer 2
+      condition: event.payload.model == 'interface'
+      action:
+        run_job_template:
+          name: "NETBOX 03 - push L2 intf"
+          organization: Default
+          job_args:
+            extra_vars: "{{ event.payload }}"
+            limit: "{{ event.payload.host }}"
+
     - name: Did not match any model
       condition: event.payload is defined
       action:
