@@ -1,0 +1,17 @@
+---
+
+- name: Netbox Device Playbook
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: GET device ID if empty
+      ansible.builtin.uri:
+        url: "{{ net_netbox_url }}/api/dcim/devices/{{ device_id }}"
+        method: GET
+        validate_certs: false
+        headers:
+          content-type: 'aplication/json'
+          Authorization: "Token {{ net_netbox_token }}"
+        body_format: json
+      register: _dcim_device
