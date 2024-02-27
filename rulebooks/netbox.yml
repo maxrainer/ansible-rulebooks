@@ -8,7 +8,7 @@
 
   rules:
     - name: IP address changed
-      condition: event.payload.model == 'ipaddress'
+      condition: event.payload.model == 'ipaddress' and event.payload.user == 'admin'
       action:
         run_job_template:
           name: "NETBOX 04 - push L3 intf"
@@ -18,7 +18,7 @@
             limit: "{{ event.payload.host }}"
 
     - name: Interface configuration and Layer 2
-      condition: event.payload.model == 'interface'
+      condition: event.payload.model == 'interface' event.payload.user == 'admin'
       action:
         run_job_template:
           name: "NETBOX 03 - push L2 intf"
