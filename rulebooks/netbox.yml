@@ -18,7 +18,7 @@
             limit: "{{ event.payload.host }}"
 
     - name: Interface configuration and Layer 2
-      condition: event.payload.model == 'interface' event.payload.user == 'admin'
+      condition: event.payload.model == 'interface' and event.payload.user == 'admin'
       action:
         run_job_template:
           name: "NETBOX 03 - push L2 intf"
