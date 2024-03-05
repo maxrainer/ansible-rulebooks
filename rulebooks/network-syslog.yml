@@ -13,8 +13,8 @@
     #   action:
     #     debug:
 
-    - name: Parse Interfaces for a single host
-      condition: event.payload.msg is search("cisco")
+    - name: User admin changed config => pull intf config
+      condition: event.payload.msg is search("admin")
       action:
         run_job_template:
           name: "NETBOX 02 - parse intfs"
@@ -22,3 +22,8 @@
           job_args:
             limit: "{{ event.payload.host }}"
             extra_vars: "{{ event.payload }}"
+
+    - name: Syslog did not match => skip
+      condition: event.payload is defined
+      action:
+        debug:
