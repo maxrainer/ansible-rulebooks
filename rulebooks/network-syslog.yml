@@ -8,16 +8,21 @@
         port: 5001
   rules:
 
-    # - name: Capture all events from this source
-    #   condition: true
-    #   action:
-    #     debug:
-
     - name: User admin changed config => pull intf config
       condition: event.payload.msg is search("admin")
       action:
         run_job_template:
           name: "NETBOX 02 - parse intfs"
+          organization: Default
+          job_args:
+            limit: "{{ event.payload.host }}"
+            extra_vars: "{{ event.payload }}"
+    
+    - name: Network device came up just now
+      condition: event.payload.msg is search("router started")
+      action:
+        run_job_template:
+          name: "NETBOX WF 01 - pull from network"
           organization: Default
           job_args:
             limit: "{{ event.payload.host }}"
